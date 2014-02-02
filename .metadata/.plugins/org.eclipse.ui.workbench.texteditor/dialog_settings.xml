@@ -13,12 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="super.onS" key="selection"/>
 		<list key="findhistory">
+			<item value="super.onsa"/>
+			<item value="super.ons"/>
+			<item value="super"/>
+			<item value="savedin"/>
+			<item value="onclick"/>
 			<item value="intent"/>
 			<item value="oncli"/>
 			<item value="setContent"/>
-			<item value="mIntent"/>
 		</list>
 		<list key="replacehistory">
 		</list>

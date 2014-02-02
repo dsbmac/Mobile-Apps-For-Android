@@ -1,5 +1,9 @@
 package course.labs.activitylab;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -72,10 +76,11 @@ public class ActivityOne extends Activity {
 			// TODO:
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable	
-			mCreate = savedInstanceState.getInt(CREATE_KEY);
-			mResume = savedInstanceState.getInt(RESUME_KEY);
-			mStart = savedInstanceState.getInt(START_KEY);
-			mRestart = savedInstanceState.getInt(RESTART_KEY);			
+			mCreate = saveCreate.getValue();
+			mRestart= 0; 
+			mStart = 0; 
+			mResume = 0;
+			
 		}
 
 		// TODO: Emit LogCat message
@@ -164,12 +169,10 @@ public class ActivityOne extends Activity {
 		// TODO:
 		// Save state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
-		savedInstanceState.putInt(CREATE_KEY, mCreate);
-		savedInstanceState.putInt(RESUME_KEY, mResume);
-		savedInstanceState.putInt(START_KEY, mStart);
-		savedInstanceState.putInt(RESTART_KEY, mRestart);
-		
-		super.onSaveInstanceState(savedInstanceState);
+		AbstractMap.SimpleEntry saveCreate = new AbstractMap.SimpleEntry(CREATE_KEY, mCreate);
+		AbstractMap.SimpleEntry saveResume = new AbstractMap.SimpleEntry(RESUME_KEY, mResume);
+		AbstractMap.SimpleEntry saveStart = new AbstractMap.SimpleEntry(START_KEY, mStart);
+		AbstractMap.SimpleEntry saveRestart = new AbstractMap.SimpleEntry(RESTART_KEY, mRestart);
 	}
 	
 	// Updates the displayed counters

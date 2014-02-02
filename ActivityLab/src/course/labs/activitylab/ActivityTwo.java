@@ -59,8 +59,7 @@ public class ActivityTwo extends Activity {
 				// TODO:
 				// This function closes Activity Two
 				// Hint: use Context's finish() method
-				finish();
-			
+				finish();			
 			}
 		});
 
@@ -70,9 +69,10 @@ public class ActivityTwo extends Activity {
 			// TODO:
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
-
-
-
+			mCreate = savedInstanceState.getInt(CREATE_KEY);
+			mResume = savedInstanceState.getInt(RESUME_KEY);
+			mStart = savedInstanceState.getInt(START_KEY);
+			mRestart = savedInstanceState.getInt(RESTART_KEY);	
 		}
 
 		// TODO: Emit LogCat message
@@ -87,7 +87,6 @@ public class ActivityTwo extends Activity {
 	}
 
 	// Lifecycle callback methods overrides
-
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -162,11 +161,12 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Save counter state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
-		//RESTART_KEY = Integer.toString(mRestart);
-		//RESUME_KEY = Integer.toString(mResume);
-		//START_KEY = Integer.toString(mStart);
-		//CREATE_KEY = Integer.toString(mCreate);
-	
+		savedInstanceState.putInt(CREATE_KEY, mCreate);
+		savedInstanceState.putInt(RESUME_KEY, mResume);
+		savedInstanceState.putInt(START_KEY, mStart);
+		savedInstanceState.putInt(RESTART_KEY, mRestart);
+		
+		super.onSaveInstanceState(savedInstanceState);	
 	}
 
 	// Updates the displayed counters
@@ -175,7 +175,6 @@ public class ActivityTwo extends Activity {
 		mTvCreate.setText("onCreate() calls: " + mCreate);
 		mTvStart.setText("onStart() calls: " + mStart);
 		mTvResume.setText("onResume() calls: " + mResume);
-		mTvRestart.setText("onRestart() calls: " + mRestart);
-	
+		mTvRestart.setText("onRestart() calls: " + mRestart);	
 	}
 }
