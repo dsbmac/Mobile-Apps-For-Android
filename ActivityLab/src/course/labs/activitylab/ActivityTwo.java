@@ -164,7 +164,7 @@ public class ActivityTwo extends Activity {
 		savedInstanceState.putInt(CREATE_KEY, mCreate);
 		savedInstanceState.putInt(RESUME_KEY, mResume);
 		savedInstanceState.putInt(START_KEY, mStart);
-		savedInstanceState.putInt(RESTART_KEY, mRestart);
+		savedInstanceState.putInt(RESTART_KEY, mRestart); 
 		
 		super.onSaveInstanceState(savedInstanceState);	
 	}

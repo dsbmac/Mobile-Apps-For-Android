@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Test2" project="ActivityLabTest" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="GalaxyNexusAPI18 [emulator-5556]" time="93.126">
+    <testsuite name="course.labs.activitylab.test.Test2" time="93.126">
+      <testcase name="testRun " classname="course.labs.activitylab.test.Test2" time="93.126"/>
+    </testsuite>
+  </testsuite>
+</testrun>
