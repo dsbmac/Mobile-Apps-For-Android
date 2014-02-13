@@ -38,8 +38,7 @@ public class ActivityLoaderActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				startExplicitActivation();
-			
+				startExplicitActivation();			
 			}
 		});
 
@@ -59,17 +58,16 @@ public class ActivityLoaderActivity extends Activity {
 	}
 
 	
-	// Start the ExplicitlyLoadedActivity
-	
+	// Start the ExplicitlyLoadedActivity	
 	private void startExplicitActivation() {
 
 		Log.i(TAG,"Entered startExplicitActivation()");
 		
 		// TODO - Create a new intent to launch the ExplicitlyLoadedActivity class
+		Intent intent = new Intent(getApplicationContext(), ExplicitlyLoadedActivity.class);
 		
 		// TODO - Start an Activity using that intent and the request code defined above
-
-
+		startActivity(intent);
 	}
 
 	// Start a Browser Activity to view a web page or its URL
@@ -102,8 +100,9 @@ public class ActivityLoaderActivity extends Activity {
 		
 		// TODO - Process the result only if this method received both a
 		// RESULT_OK result code and a recognized request code
-		// If so, update the Textview showing the user-entered text.
-
-
+		// If so, update the TextView showing the user-entered text.
+		if (resultCode == RESULT_OK) {
+			mUserTextView.setText(data.getStringExtra("Result"));
+		}
 	}
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Test1" project="ActivityLabTest" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="LabPhone [emulator-5554]" time="75.275">
+    <testsuite name="course.labs.activitylab.test.Test1" time="75.275">
+      <testcase name="testRun " classname="course.labs.activitylab.test.Test1" time="75.275"/>
+    </testsuite>
+  </testsuite>
+</testrun>

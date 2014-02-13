@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ActivityLabTest" project="ActivityLabTest" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="Phone [emulator-5554]" time="276.216">
+    <testsuite name="course.labs.activitylab.test.Test1" time="76.267">
+      <testcase name="testRun " classname="course.labs.activitylab.test.Test1" time="76.267"/>
+    </testsuite>
+    <testsuite name="course.labs.activitylab.test.Test2" time="99.618">
+      <testcase name="testRun " classname="course.labs.activitylab.test.Test2" time="99.618"/>
+    </testsuite>
+    <testsuite name="course.labs.activitylab.test.Test3" time="100.331">
+      <testcase name="testRun " classname="course.labs.activitylab.test.Test3" time="100.331"/>
+    </testsuite>
+  </testsuite>
+</testrun>

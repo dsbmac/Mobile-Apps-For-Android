@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ExplicitTest" project="IntentsLabTest" tests="1" started="1" failures="1" errors="0" ignored="0">
+  <testsuite name="LabPhone [emulator-5554]" time="68.881">
+    <testsuite name="course.labs.intentslab.test.ExplicitTest" time="68.881">
+      <testcase name="testRun " classname="course.labs.intentslab.test.ExplicitTest" time="68.881">
+        <failure>junit.framework.AssertionFailedError: View with id: '2131165186' is not found!&#13;
+at com.robotium.solo.Solo.getView(Solo.java:1962)&#13;
+at com.robotium.solo.Solo.getView(Solo.java:1942)&#13;
+at course.labs.intentslab.test.ExplicitTest.testRun(ExplicitTest.java:56)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1701)&#13;
+&#13;
+</failure>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>
