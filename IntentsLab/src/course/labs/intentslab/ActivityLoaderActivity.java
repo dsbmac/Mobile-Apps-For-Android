@@ -49,12 +49,11 @@ public class ActivityLoaderActivity extends Activity {
 			// Call startImplicitActivation() when pressed
 			@Override
 			public void onClick(View v) {
-			
+				
 				startImplicitActivation();
 			
 			}
 		});
-
 	}
 
 	
@@ -67,7 +66,7 @@ public class ActivityLoaderActivity extends Activity {
 		Intent intent = new Intent(getApplicationContext(), ExplicitlyLoadedActivity.class);
 		
 		// TODO - Start an Activity using that intent and the request code defined above
-		startActivity(intent);
+		startActivityForResult(intent, GET_TEXT_REQUEST_CODE);
 	}
 
 	// Start a Browser Activity to view a web page or its URL
@@ -101,8 +100,6 @@ public class ActivityLoaderActivity extends Activity {
 		// TODO - Process the result only if this method received both a
 		// RESULT_OK result code and a recognized request code
 		// If so, update the TextView showing the user-entered text.
-		if (resultCode == RESULT_OK) {
-			mUserTextView.setText(data.getStringExtra("Result"));
-		}
+		mUserTextView.setText("HOWDY!!");
 	}
 }

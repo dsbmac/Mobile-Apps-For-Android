@@ -97,6 +97,7 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		mStart++;
+		
 		// Update the user interface
 		displayCounts();
 	}
@@ -171,7 +172,6 @@ public class ActivityTwo extends Activity {
 
 	// Updates the displayed counters
 	public void displayCounts() {
-
 		mTvCreate.setText("onCreate() calls: " + mCreate);
 		mTvStart.setText("onStart() calls: " + mStart);
 		mTvResume.setText("onResume() calls: " + mResume);
