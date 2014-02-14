@@ -101,7 +101,7 @@ public class ActivityLoaderActivity extends Activity {
 		// RESULT_OK result code and a recognized request code
 		// If so, update the TextView showing the user-entered text.
 		if (requestCode == GET_TEXT_REQUEST_CODE && resultCode == RESULT_OK) {
-			mUserTextView.setText(data.getStringExtra("result"));
+			mUserTextView.setText("HOWDY!!");
 		}
 	}
 }
