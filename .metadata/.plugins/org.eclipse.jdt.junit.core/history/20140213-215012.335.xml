@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ExplicitTest" project="IntentsLabTest" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="emulator-5554" time="16.364">
+    <testsuite name="course.labs.intentslab.test.ExplicitTest" time="16.364">
+      <testcase name="testRun " classname="course.labs.intentslab.test.ExplicitTest" time="16.364"/>
+    </testsuite>
+  </testsuite>
+</testrun>

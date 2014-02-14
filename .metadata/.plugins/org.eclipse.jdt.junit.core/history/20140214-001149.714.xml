@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ImplicitTest" project="IntentsLabTest" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="emulator-5554" time="93.283">
+    <testsuite name="course.labs.intentslab.test.ImplicitTest" time="93.283">
+      <testcase name="testRun " classname="course.labs.intentslab.test.ImplicitTest" time="93.283">
+        <error>Test failed to run to completion. Reason: 'Instrumentation run failed due to 'Process crashed.''. Check device logcat for details&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>

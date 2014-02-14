@@ -48,10 +48,8 @@ public class ActivityLoaderActivity extends Activity {
 
 			// Call startImplicitActivation() when pressed
 			@Override
-			public void onClick(View v) {
-				
-				startImplicitActivation();
-			
+			public void onClick(View v) {				
+				startImplicitActivation();			
 			}
 		});
 	}
@@ -77,19 +75,19 @@ public class ActivityLoaderActivity extends Activity {
 
 		// TODO - Create a base intent for viewing a URL 
 		// (HINT:  second parameter uses parse() from the Uri class)
-		
+		Uri webpage = Uri.parse(URL);
+		Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
 		
 		// TODO - Create a chooser intent, for choosing which Activity
 		// will carry out the baseIntent. Store the Intent in the 
 		// chooserIntent variable below. HINT: using the Intent class' 
-		// createChooser())
-		
-		Intent chooserIntent = null;
+		// createChooser())		
+		Intent chooserIntent = Intent.createChooser(webIntent, CHOOSER_TEXT);
 
 		Log.i(TAG,"Chooser Intent Action:" + chooserIntent.getAction());
+		
 		// TODO - Start the chooser Activity, using the chooser intent
 		startActivity(chooserIntent);
-
 	}
 
 	@Override
