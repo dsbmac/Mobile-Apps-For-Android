@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-task-tag-projects-already-scanned=HelloAndroid,SimpleCalc,SimpleBroadcast,DialtactsActivity,MapLocation,MusicBrowserActivity,tests,TheAnswer,ActivityLab,ActivityLabTest,DeskClock,SimpleCalcTest,LoginScreen,MapLocationFromContactsActivity,IntentsLab,MyBrowser,TitlesListActivity,IntentsLabTest
+task-tag-projects-already-scanned=HelloAndroid,SimpleCalc,SimpleBroadcast,DialtactsActivity,MapLocation,MusicBrowserActivity,tests,TheAnswer,ActivityLab,ActivityLabTest,DeskClock,SimpleCalcTest,LoginScreen,MapLocationFromContactsActivity,IntentsLab,MyBrowser,TitlesListActivity,IntentsLabTest,DangerousApp,PermissionsLab
