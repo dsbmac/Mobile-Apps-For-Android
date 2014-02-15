@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class BookmarksActivity extends Activity {
 	
 	private static final String TAG = "Lab-Permissions";
+	private static final String ACTION_DANGER = "course.labs.permissions.DANGEROUS_ACTIVITY";
 
 	static final String[] projection = { Browser.BookmarkColumns.TITLE,
 			Browser.BookmarkColumns.URL };
@@ -79,6 +80,7 @@ public class BookmarksActivity extends Activity {
 		Log.i(TAG, "Entered startGoToDangerousActivity()");
 
 		// TODO - Start the GoToDangerousActivity
+		//Intent intent = new Intent(ACTION_DANGER);
 		Intent intent = new Intent(getApplicationContext(), GoToDangerousActivity.class);
 		startActivity(intent);		
 	}
