@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FragmentsLabTestTablet" project="FragmentsLabTestTablet" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="Tablet [emulator-5554]" time="29.483">
+    <testsuite name="course.labs.fragmentslab.test.TabletTest" time="29.483">
+      <testcase name="testRun " classname="course.labs.fragmentslab.test.TabletTest" time="29.482"/>
+    </testsuite>
+  </testsuite>
+</testrun>
