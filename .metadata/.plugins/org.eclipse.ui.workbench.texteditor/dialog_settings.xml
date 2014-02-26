@@ -13,16 +13,16 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="ToDoIt" key="selection"/>
 		<list key="findhistory">
+			<item value="todoit"/>
+			<item value="mquotef"/>
+			<item value="mtitle"/>
+			<item value="title"/>
 			<item value="startbook"/>
 			<item value="onactivity"/>
 			<item value="textv"/>
 			<item value="super.onsa"/>
-			<item value="super.ons"/>
-			<item value="super"/>
-			<item value="savedin"/>
-			<item value="onclick"/>
 		</list>
 		<list key="replacehistory">
 		</list>

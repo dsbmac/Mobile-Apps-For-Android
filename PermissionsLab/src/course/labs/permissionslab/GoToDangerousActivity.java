@@ -24,12 +24,9 @@ public class GoToDangerousActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
 				startDangerousActivity();
-
 			}
 		});
-
 	}
 
 	private void startDangerousActivity() {

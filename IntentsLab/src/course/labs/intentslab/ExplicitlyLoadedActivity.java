@@ -32,12 +32,9 @@ public class ExplicitlyLoadedActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
 				enterClicked();
-			
 			}
 		});
-
 	}
 
 	// Sets result to send back to calling Activity and finishes

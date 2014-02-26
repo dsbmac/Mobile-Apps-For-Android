@@ -32,5 +32,14 @@
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392462866543_28" label="Window Working Set" name="Aggregate for window 1392462866543"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392477598666_30" label="Window Working Set" name="Aggregate for window 1392477598666"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392600271371_31" label="Window Working Set" name="Aggregate for window 1392600271371"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392611998731_32" label="Window Working Set" name="Aggregate for window 1392611998731"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392612114113_33" label="Window Working Set" name="Aggregate for window 1392612114113"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392612142201_34" label="Window Working Set" name="Aggregate for window 1392612142201"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392612217555_35" label="Window Working Set" name="Aggregate for window 1392612217555"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392613297287_36" label="Window Working Set" name="Aggregate for window 1392613297286"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392613621325_37" label="Window Working Set" name="Aggregate for window 1392613621325"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1392918879061_38" label="Window Working Set" name="Aggregate for window 1392918879060"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1393272176606_39" label="Window Working Set" name="Aggregate for window 1393272176606"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1393344914472_40" label="Window Working Set" name="Aggregate for window 1393344914471"/>
 <mruList name="Examples"/>
 </workingSetManager>

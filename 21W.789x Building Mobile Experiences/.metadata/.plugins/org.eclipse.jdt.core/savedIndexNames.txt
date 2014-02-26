@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+C:\Users\dsbmac\workspace\21W.789x Building Mobile Experiences\.metadata\.plugins\org.eclipse.jdt.core
+864176106.index
+549271697.index
