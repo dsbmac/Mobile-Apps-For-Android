@@ -109,8 +109,9 @@ public class MainActivity extends Activity implements SelectionListener {
 					// Check to make sure this is an ordered broadcast
 					// Let sender know that the Intent was received
 					// by setting result code to RESULT_OK
-
-
+					if (mRefreshReceiver.isOrderedBroadcast()) {
+						setResultCode(Activity.RESULT_OK);
+					}
 				}
 			};
 
@@ -183,9 +184,11 @@ public class MainActivity extends Activity implements SelectionListener {
 		// TODO:
 		// Register the BroadcastReceiver to receive a 
 		// DATA_REFRESHED_ACTION broadcast
-
-
-		
+		if (mRefreshReceiver != null) {
+			IntentFilter filter = new IntentFilter();
+			filter.addAction("DATA_REFRESHED_ACTION");
+			registerReceiver(mRefreshReceiver, filter);
+		}
 	}
 
 	@Override
@@ -193,7 +196,9 @@ public class MainActivity extends Activity implements SelectionListener {
 
 		// TODO:
 		// Unregister the BroadcastReceiver
-
+		if (mRefreshReceiver != null) {
+			unregisterReceiver(mRefreshReceiver);
+		}
 
 		
 		
