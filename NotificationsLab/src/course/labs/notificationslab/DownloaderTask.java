@@ -138,7 +138,6 @@ public class DownloaderTask extends AsyncTask<String, Void, String[]> {
 
 			// Save tweets to a file
 			saveTweetsToFile();
-
 		}
 
 		// Sends an ordered broadcast to determine whether MainActivity is
@@ -192,14 +191,19 @@ public class DownloaderTask extends AsyncTask<String, Void, String[]> {
 							// several pieces of information. You can use
 							// android.R.drawable.stat_sys_warning
 							// for the small icon. You should also setAutoCancel(true). 
-							Notification notification = new Notification.Builder(context)
+							Notification notificationBuilder = new Notification.Builder(mApplicationContext)
+								.setContentTitle("Tweets")
+								.setContentText("Download completed successfully.")
+								.setContentIntent(pendingIntent)
+								.setContent(mContentView)
 								.setSmallIcon(android.R.drawable.stat_sys_warning)
 								.setAutoCancel(true)
 								.build();
 							
 							// TODO: Send the notification
-							notification.notifyAll();
-							
+							NotificationManager mNotificationManager =
+									(NotificationManager) mApplicationContext.getSystemService(Context.NOTIFICATION_SERVICE);
+							mNotificationManager.notify(MY_NOTIFICATION_ID, notificationBuilder);
 							
 							log("Notification Area Notification sent");
 						}

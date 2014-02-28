@@ -199,9 +199,7 @@ public class MainActivity extends Activity implements SelectionListener {
 		if (mRefreshReceiver != null) {
 			unregisterReceiver(mRefreshReceiver);
 		}
-
-		
-		
+	
 		super.onPause();
 
 	}

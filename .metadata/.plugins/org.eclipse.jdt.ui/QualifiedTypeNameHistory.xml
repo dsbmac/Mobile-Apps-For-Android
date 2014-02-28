@@ -11,4 +11,7 @@
 <fullyQualifiedTypeName name="course.labs.todomanager.ToDoItem.Status"/>
 <fullyQualifiedTypeName name="course.labs.todomanager.R.layout"/>
 <fullyQualifiedTypeName name="course.labs.todomanager.R.id"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="course.labs.notificationslab.R.id"/>
+<fullyQualifiedTypeName name="android.app.Notification.Builder"/>
 </qualifiedTypeNameHistroy>
