@@ -58,7 +58,6 @@ public class MainActivity extends Activity implements SelectionListener {
 				TWEET_FILENAME).lastModified()) < TWO_MIN;
 
 		ensureData();
-
 	}
 
 	// Add Friends Fragment to Activity
@@ -95,7 +94,7 @@ public class MainActivity extends Activity implements SelectionListener {
 			// TODO:
 			// Start new AsyncTask to download Tweets from network
 			DownloaderTask download = new DownloaderTask(this);
-			download.execute(URL_LGAGA, URL_RBLACK, URL_TSWIFT);
+			download.execute(URL_TSWIFT, URL_RBLACK, URL_LGAGA);
 			
 			// Set up a BroadcastReceiver to receive an Intent when download
 			// finishes. 
@@ -184,11 +183,10 @@ public class MainActivity extends Activity implements SelectionListener {
 		// TODO:
 		// Register the BroadcastReceiver to receive a 
 		// DATA_REFRESHED_ACTION broadcast
-		if (mRefreshReceiver != null) {
-			IntentFilter filter = new IntentFilter();
-			filter.addAction("DATA_REFRESHED_ACTION");
-			registerReceiver(mRefreshReceiver, filter);
-		}
+		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("DATA_REFRESHED_ACTION");
+		registerReceiver(mRefreshReceiver, filter);
 	}
 
 	@Override
@@ -201,7 +199,6 @@ public class MainActivity extends Activity implements SelectionListener {
 		}
 	
 		super.onPause();
-
 	}
 
 	// Convert raw Tweet data (in JSON format) into text for display
