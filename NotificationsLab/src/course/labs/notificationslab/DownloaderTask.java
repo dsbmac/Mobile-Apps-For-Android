@@ -245,5 +245,4 @@ public class DownloaderTask extends AsyncTask<String, Void, String[]> {
 		}
 		Log.i(TAG, msg);
 	}
-
 }
