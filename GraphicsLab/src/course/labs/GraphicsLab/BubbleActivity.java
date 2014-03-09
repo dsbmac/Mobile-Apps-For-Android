@@ -242,10 +242,8 @@ public class BubbleActivity extends Activity {
 				// TODO - set rotation in range [1..3]
 				long min = 1;
 				long max = 3;
-				mDRotate = randomRangeLong(min, max, r);
-			
-			} else {
-			
+				mDRotate = randomRangeLong(min, max, r);			
+			} else {			
 				mDRotate = 0;			
 			}
 		}
@@ -296,7 +294,7 @@ public class BubbleActivity extends Activity {
 			}
 
 			// TODO - create the scaled bitmap using size set above
-			mScaledBitmap = Bitmap.createScaledBitmap(mBitmap, mScaledBitmapWidth, mScaledBitmapWidth, false);
+			mScaledBitmap = Bitmap.createScaledBitmap(mBitmap, mScaledBitmapWidth, mScaledBitmapWidth, true);
 		}
 
 		// Start moving the BubbleView & updating the display
@@ -320,10 +318,10 @@ public class BubbleActivity extends Activity {
 					
 					mXPos += mDx;
 					mYPos += mDy;		
-					if (!moveWhileOnScreen()) {
-
-					} else {
+					if (moveWhileOnScreen()) {
 						stop(false);
+					} else {
+						BubbleView.this.postInvalidate();
 					}
 				}
 			}, 0, REFRESH_RATE, TimeUnit.MILLISECONDS);
@@ -393,15 +391,15 @@ public class BubbleActivity extends Activity {
 			mRotate += mDRotate;
 
 			// TODO Rotate the canvas by current rotation
-			canvas.rotate(mRotate);
+			float scale = mScaledBitmap.getHeight() / mBitmap.getHeight();
+			canvas.rotate(mRotate, mXPos*scale, mYPos*scale);
 			
-			// TODO - draw the bitmap at it's new location
-			canvas.drawBitmap(mBitmap, mXPos, mYPos, mPainter);
+			// TODO - draw the bitmap at it's new location			
+			canvas.drawBitmap(mScaledBitmap, mXPos, mYPos, mPainter);
 
 			// TODO - restore the canvas
 			canvas.restore();
 		}
-
 
 		private synchronized boolean moveWhileOnScreen() {
 
@@ -426,21 +424,15 @@ public class BubbleActivity extends Activity {
 	
 	// helper to generate an integer within a range
 	private int randomRangeInt(int min, int max, Random r) {
-		int result = min + (int)(r.nextInt(max - min) + 1);
-		
-		return result;
+		return min + (int) (r.nextFloat() * ((1 + max) - min));		
 	}
 
 	private float randomRangeFloat(float min, float max, Random r) {
-		float result = min + (int)(r.nextFloat() * ((max - min) + 1));
-
-		return result;
+		return min + (r.nextFloat() * ((1 + max) - min));
 	}
 	
 	private long randomRangeLong(long min, long max, Random r) {
-		long result = min + (int)(r.nextLong() * ((max - min) + 1));
-
-		return result;
+		return min + (r.nextLong() * ((1 + max) - min));
 	}
 	
 	
