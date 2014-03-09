@@ -14,4 +14,5 @@
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="course.labs.notificationslab.R.id"/>
 <fullyQualifiedTypeName name="android.app.Notification.Builder"/>
+<fullyQualifiedTypeName name="android.media.SoundPool.OnLoadCompleteListener"/>
 </qualifiedTypeNameHistroy>
