@@ -334,6 +334,11 @@ public class BubbleActivity extends Activity {
 			boolean result = (x > mXPos) & (x < mXPos +  mScaledBitmapWidth) &
 					(y > mYPos) & (y < mYPos +  mScaledBitmapWidth);
 			
+			//log("bubble bounds: " + mXPos + ", " + mXPos + mScaledBitmapWidth + ", y: " + 
+			//		mYPos + ", " + mYPos +  mScaledBitmapWidth);
+			//log("gesture position: " + x + "," + y);
+			//log("intersects? " + result);
+
 			return result;
 		}
 

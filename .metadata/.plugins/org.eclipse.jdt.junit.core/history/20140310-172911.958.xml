@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BubbleActivityFloatOffScreen" project="GraphicsLabTest" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="LabPhone [emulator-5556]" time="24.976">
+    <testsuite name="course.labs.TouchLab.test.BubbleActivityFloatOffScreen" time="24.976">
+      <testcase name="testRun " classname="course.labs.TouchLab.test.BubbleActivityFloatOffScreen" time="24.976"/>
+    </testsuite>
+  </testsuite>
+</testrun>
