@@ -73,7 +73,6 @@ public class BubbleActivity extends Activity {
 
 		// Load basic bubble Bitmap
 		mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b64);
-
 	}
 
 	@Override
@@ -134,9 +133,16 @@ public class BubbleActivity extends Activity {
 				// TODO - Implement onFling actions.
 				// You can get all Views in mFrame using the
 				// ViewGroup.getChildCount() method
-
+				float xPos1 = event1.getRawX();
+				float yPos1 = event1.getRawY();
 				
-				
+				for (int i=0; i<mFrame.getChildCount(); i++) {
+					BubbleView bubble = (BubbleView) mFrame.getChildAt(i);
+					if (bubble.intersects(xPos1, yPos1)) {
+						bubble.deflect(velocityX, velocityY);
+						return true;
+					} 					
+				}
 				
 				return false;
 				
@@ -152,23 +158,20 @@ public class BubbleActivity extends Activity {
 				// TODO - Implement onSingleTapConfirmed actions.
 				// You can get all Views in mFrame using the
 				// ViewGroup.getChildCount() method
-				Boolean isClear = true;
 				float xPos = event.getRawX();
 				float yPos = event.getRawY();
 				
 				for (int i=0; i<mFrame.getChildCount(); i++) {
 					BubbleView bubble = (BubbleView) mFrame.getChildAt(i);
 					if (bubble.intersects(xPos, yPos)) {
-						mFrame.removeViewAt(i);
-						isClear = false;
+						bubble.stop(true);
+						return true;
 					} 					
 				}
 				
 				// if coordinates are clear then add new bubble there
-				if (isClear) {
-					BubbleView newBubble = new BubbleView( mFrame.getContext(), xPos, yPos);
-					mFrame.addView(newBubble);
-				}
+				BubbleView newBubble = new BubbleView( mFrame.getContext(), xPos, yPos);
+				mFrame.addView(newBubble);
 				
 				return false;
 			}
@@ -179,9 +182,7 @@ public class BubbleActivity extends Activity {
 	public boolean onTouchEvent(MotionEvent event) {
 
 		// TODO - delegate the touch to the gestureDetector 
-		mGestureDetector.onTouchEvent(event);
-		
-		return false;
+		return mGestureDetector.onTouchEvent(event);
 	}
 
 	@Override
@@ -189,6 +190,7 @@ public class BubbleActivity extends Activity {
 		
 		// TODO - Release all SoundPool resources
 		mSoundPool.release();
+		mSoundPool.unload(mSoundID);
 		mSoundPool = null;
 		
 		super.onPause();
@@ -240,9 +242,10 @@ public class BubbleActivity extends Activity {
 			if (speedMode == RANDOM) {
 				
 				// TODO - set rotation in range [1..3]
-				long min = 1;
-				long max = 3;
-				mDRotate = randomRangeLong(min, max, r);			
+				int min = 1;
+				int max = 3;
+				mDRotate = (long) randomRangeInt(min, max, r);		
+				log("mDRotate set to: " + mDRotate);
 			} else {			
 				mDRotate = 0;			
 			}
@@ -272,10 +275,10 @@ public class BubbleActivity extends Activity {
 				// TODO - Set movement direction and speed
 				// Limit movement speed in the x and y
 				// direction to [-3..3].
-				float min = -3;
-				float max = 3;
-				mDx = randomRangeFloat(min, max, r);
-				mDy = randomRangeFloat(min, max, r);
+				int min = -3;
+				int max = 3;
+				mDx = (float) randomRangeInt(min, max, r);
+				mDy = (float) randomRangeInt(min, max, r);
 			}
 		}
 
@@ -315,9 +318,7 @@ public class BubbleActivity extends Activity {
 					// move one step. If the BubbleView exits the display, 
 					// stop the BubbleView's Worker Thread. 
 					// Otherwise, request that the BubbleView be redrawn. 
-					
-					mXPos += mDx;
-					mYPos += mDy;		
+		
 					if (moveWhileOnScreen()) {
 						stop(false);
 					} else {
@@ -330,8 +331,9 @@ public class BubbleActivity extends Activity {
 		private synchronized boolean intersects(float x, float y) {
 
 			// TODO - Return true if the BubbleView intersects position (x,y)
-
-			return false;
+			boolean result = (x > mXPos) & (x < mXPos +  mScaledBitmapWidth) &
+					(y > mYPos) & (y < mYPos +  mScaledBitmapWidth);
+			return result;
 		}
 
 		// Cancel the Bubble's movement
@@ -349,21 +351,17 @@ public class BubbleActivity extends Activity {
 					public void run() {
 						
 						// TODO - Remove the BubbleView from mFrame
-
-
-						
+						mFrame.removeView(BubbleView.this);
 						
 						if (popped) {
 							log("Pop!");
 
 							// TODO - If the bubble was popped by user,
 							// play the popping sound
-
-						
+							mSoundPool.play(mSoundID, 1, 1, 0, 0, 1);
 						}
 
-						log("Bubble removed from view!");
-					
+						log("Bubble removed from view!");					
 					}
 				});
 			}
@@ -375,9 +373,9 @@ public class BubbleActivity extends Activity {
 
 			//TODO - set mDx and mDy to be the new velocities divided by the REFRESH_RATE
 			
-			mDx = 0;
-			mDy = 0;
-
+			mDx = velocityX / REFRESH_RATE;
+			mDy = velocityY / REFRESH_RATE;
+			
 		}
 
 		// Draw the Bubble at its current location
@@ -388,7 +386,7 @@ public class BubbleActivity extends Activity {
 			canvas.save();
 
 			// TODO - increase the rotation of the original image by mDRotate
-			mRotate += mDRotate;
+			mRotate = (mRotate + mDRotate) % 360;
 
 			// TODO Rotate the canvas by current rotation
 			float scale = mScaledBitmap.getHeight() / mBitmap.getHeight();
@@ -405,37 +403,27 @@ public class BubbleActivity extends Activity {
 
 			// TODO - Move the BubbleView
 			// Returns true if the BubbleView has exited the screen
-
-
+			mXPos += mDx;
+			mYPos += mDy;
 			
-			
-			return false;
-
+			return isOutOfView();
 		}
 
 		private boolean isOutOfView() {
 
 			// TODO - Return true if the BubbleView has exited the screen
-
-			return false;
+			boolean offScreen = (mXPos < 0-mScaledBitmapWidth) || (mXPos > mDisplayWidth) || 
+					(mYPos < 0-mScaledBitmapWidth) || (mYPos > mDisplayHeight);
+			
+			return offScreen;
 
 		}
 	}
 	
 	// helper to generate an integer within a range
 	private int randomRangeInt(int min, int max, Random r) {
-		return min + (int) (r.nextFloat() * ((1 + max) - min));		
+		return r.nextInt(max-min) + min;		
 	}
-
-	private float randomRangeFloat(float min, float max, Random r) {
-		return min + (r.nextFloat() * ((1 + max) - min));
-	}
-	
-	private long randomRangeLong(long min, long max, Random r) {
-		return min + (r.nextLong() * ((1 + max) - min));
-	}
-	
-	
 	
 	// Do not modify below here
 	@Override
