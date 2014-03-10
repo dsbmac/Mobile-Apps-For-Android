@@ -172,6 +172,7 @@ public class BubbleActivity extends Activity {
 				// if coordinates are clear then add new bubble there
 				BubbleView newBubble = new BubbleView( mFrame.getContext(), xPos, yPos);
 				mFrame.addView(newBubble);
+				newBubble.start();
 				
 				return false;
 			}
@@ -245,7 +246,6 @@ public class BubbleActivity extends Activity {
 				int min = 1;
 				int max = 3;
 				mDRotate = (long) randomRangeInt(min, max, r);		
-				log("mDRotate set to: " + mDRotate);
 			} else {			
 				mDRotate = 0;			
 			}
@@ -333,6 +333,12 @@ public class BubbleActivity extends Activity {
 			// TODO - Return true if the BubbleView intersects position (x,y)
 			boolean result = (x > mXPos) & (x < mXPos +  mScaledBitmapWidth) &
 					(y > mYPos) & (y < mYPos +  mScaledBitmapWidth);
+			
+			//log("bubble bounds: " + mXPos + ", " + mXPos + mScaledBitmapWidth + ", y: " + 
+			//		mYPos + ", " + mYPos +  mScaledBitmapWidth);
+			//log("gesture position: " + x + "," + y);
+			//log("intersects? " + result);
+
 			return result;
 		}
 
@@ -422,7 +428,8 @@ public class BubbleActivity extends Activity {
 	
 	// helper to generate an integer within a range
 	private int randomRangeInt(int min, int max, Random r) {
-		return r.nextInt(max-min) + min;		
+		int result = min + r.nextInt(max- min + 1);
+		return result;
 	}
 	
 	// Do not modify below here
