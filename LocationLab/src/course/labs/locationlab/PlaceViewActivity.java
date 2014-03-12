@@ -1,6 +1,7 @@
 package course.labs.locationlab;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -120,13 +121,21 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
 
         // TODO - Check NETWORK_PROVIDER for an existing location reading.
         // Only keep this last reading if it is fresh - less than 5 minutes old.
-
-	
+		
+		if (null == (mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE)))
+			finish();
+		
+		Location locationReading = bestLastKnownLocation(mMinTime);
+		
+		if (locationReading != null) {
+			mLastLocationReading = locationReading;
+		} else {
+			mLastLocationReading = null;
+		}
 		
         // TODO - register to receive location updates from NETWORK_PROVIDER
-
-
-		
+		mLocationManager.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER, mMinTime, mMinDistance, this);
 	}
 
 	@Override
@@ -135,8 +144,7 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
 		mMockLocationProvider.shutdown();
 
 		// TODO - unregister for location updates
-
-
+		mLocationManager.removeUpdates(this);
 		
 		super.onPause();
 	}
@@ -212,6 +220,30 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	private Location bestLastKnownLocation(long minTime) {
+
+		Location bestResult = null;
+		long bestTime = Long.MIN_VALUE;
+
+		String provider = LocationManager.NETWORK_PROVIDER; 
+		Location location = mLocationManager.getLastKnownLocation(provider);
+
+		if (location != null) {
+
+			long time = location.getTime();
+
+			bestResult = location;
+			bestTime = time;
+		}
+
+		// Return best reading or null
+		if (bestTime < minTime) {
+			return null;
+		} else {
+			return bestResult;
 		}
 	}
 
