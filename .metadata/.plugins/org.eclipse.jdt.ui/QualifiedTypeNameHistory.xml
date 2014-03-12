@@ -15,4 +15,8 @@
 <fullyQualifiedTypeName name="course.labs.notificationslab.R.id"/>
 <fullyQualifiedTypeName name="android.app.Notification.Builder"/>
 <fullyQualifiedTypeName name="android.media.SoundPool.OnLoadCompleteListener"/>
+<fullyQualifiedTypeName name="course.labs.locationlab.R.id"/>
+<fullyQualifiedTypeName name="course.labs.locationlab.R.layout"/>
+<fullyQualifiedTypeName name="android.view.LayoutInflater"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
 </qualifiedTypeNameHistroy>

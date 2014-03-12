@@ -43,7 +43,8 @@ public class PlaceViewAdapter extends BaseAdapter {
 
 		if (null == convertView) {
 			holder = new ViewHolder();
-			newView = inflater.inflate(R.layout.place_badge_view, null);
+			// newView = inflater.inflate(R.layout.place_badge_view, null);
+			newView = inflater.inflate(R.layout.place_badge_view, parent, false);
 			holder.flag = (ImageView) newView.findViewById(R.id.flag);
 			holder.country = (TextView) newView.findViewById(R.id.country_name);
 			holder.place = (TextView) newView.findViewById(R.id.place_name);

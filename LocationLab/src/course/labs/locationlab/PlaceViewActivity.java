@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
 public class PlaceViewActivity extends ListActivity implements LocationListener {
 	private static final long FIVE_MINS = 5 * 60 * 1000;
@@ -38,36 +41,72 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 
         // TODO - Set up the app's user interface
         // This class is a ListActivity, so it has its own ListView
         // ListView's adapter should be a PlaceViewAdapter
+		super.onCreate(savedInstanceState);
+		ListView listView = this.getListView();
+		listView.setFooterDividersEnabled(true);
 
+		mAdapter = new PlaceViewAdapter(getApplicationContext());
 		
         // TODO - add a footerView to the ListView
         // You can use footer_view.xml to define the footer
-
-
+		
+		View footerView = null;
+		LayoutInflater inflater = this.getLayoutInflater();
+		footerView = (View) inflater.inflate( R.layout.footer_view, listView, false);
+		
+		listView.addFooterView(footerView);
+		listView.setAdapter(mAdapter); //if you add this before adding the footer it does not show
 		
         // TODO - When the footerView's onClick() method is called, it must issue the
         // following log call
         // log("Entered footerView.OnClickListener.onClick()");
-        
-        // footerView must respond to user clicks.
-        // Must handle 3 cases:
-        // 1) The current location is new - download new Place Badge. Issue the
-        // following log call:
-        // log("Starting Place Download");
+		/*
+		footerView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-        // 2) The current location has been seen before - issue Toast message.
-        // Issue the following log call:
-        // log("You already have this location badge");
-        
-        // 3) There is no current location - response is up to you. The best
-        // solution is to disable the footerView until you have a location.
-        // Issue the following log call:
-        // log("Location data is not available");
+		        log("Entered footerView.OnClickListener.onClick()");      
+		        
+		        // 3) There is no current location - response is up to you. The best
+		        // solution is to disable the footerView until you have a location.
+		        // Issue the following log call:
+		        // log("Location data is not available");
+		        
+		        if (mLastLocationReading == null) {
+		        	
+		        	log("Location data is not available");
+		        	
+		        	getListView().removeFooterView(v);
+		        }
+		        
+		        // footerView must respond to user clicks.
+		        // Must handle 3 cases:
+		        // 1) The current location is new - download new Place Badge. Issue the
+		        // following log call:
+		        // log("Starting Place Download");
+		        
+		        else if (mAdapter.intersects(mLastLocationReading)==false) {
+		        	log("Starting Place Download");
+		        	
+		        	PlaceDownloaderTask download = new PlaceDownloaderTask(PlaceViewActivity.this);
+		        }
+		        
+		        // 2) The current location has been seen before - issue Toast message.
+		        // Issue the following log call:
+		        // log("You already have this location badge");
+		        
+		        else {
+		        	
+		        	log("You already have this location badge");
+		        	
+		        }
+			}
+		});  
+		*/
  		
 
 	}
