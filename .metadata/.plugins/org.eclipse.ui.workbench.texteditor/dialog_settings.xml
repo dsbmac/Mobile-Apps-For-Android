@@ -13,16 +13,16 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Canvas" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
+			<item value="locationclient"/>
+			<item value="bestLastKnownLocation"/>
+			<item value="mBestReading"/>
+			<item value="upda"/>
+			<item value="view"/>
 			<item value="canvas"/>
 			<item value="ondr"/>
 			<item value="set mov"/>
-			<item value="setRot"/>
-			<item value="setrot"/>
-			<item value="create the"/>
-			<item value="save the canvas"/>
-			<item value="pop"/>
 		</list>
 		<list key="replacehistory">
 		</list>

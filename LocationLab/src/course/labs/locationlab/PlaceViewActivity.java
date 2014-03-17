@@ -65,12 +65,16 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
         // TODO - When the footerView's onClick() method is called, it must issue the
         // following log call
         // log("Entered footerView.OnClickListener.onClick()");
-		/*
+		
 		footerView.setOnClickListener(new OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 
-		        log("Entered footerView.OnClickListener.onClick()");      
+		        log("Entered footerView.OnClickListener.onClick()");   
+		        
+		        // footerView must respond to user clicks.
+		        // Must handle 3 cases:
 		        
 		        // 3) There is no current location - response is up to you. The best
 		        // solution is to disable the footerView until you have a location.
@@ -82,34 +86,32 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
 		        	log("Location data is not available");
 		        	
 		        	getListView().removeFooterView(v);
+		        	return;
 		        }
-		        
-		        // footerView must respond to user clicks.
-		        // Must handle 3 cases:
-		        // 1) The current location is new - download new Place Badge. Issue the
-		        // following log call:
-		        // log("Starting Place Download");
-		        
-		        else if (mAdapter.intersects(mLastLocationReading)==false) {
-		        	log("Starting Place Download");
-		        	
-		        	PlaceDownloaderTask download = new PlaceDownloaderTask(PlaceViewActivity.this);
-		        }
-		        
+
 		        // 2) The current location has been seen before - issue Toast message.
 		        // Issue the following log call:
 		        // log("You already have this location badge");
 		        
-		        else {
+		        else if (mAdapter.intersects(mLastLocationReading)) {
 		        	
 		        	log("You already have this location badge");
+
+		        }
+		        
+		        // 1) The current location is new - download new Place Badge. Issue the
+		        // following log call:
+		        // log("Starting Place Download");
+		        
+		        else {
 		        	
+		        	log("Starting Place Download");
+		        	
+		        	PlaceDownloaderTask download = new PlaceDownloaderTask(PlaceViewActivity.this);
+		        	download.execute(mLastLocationReading);
 		        }
 			}
 		});  
-		*/
- 		
-
 	}
 
 	@Override
@@ -168,7 +170,11 @@ public class PlaceViewActivity extends ListActivity implements LocationListener 
         // 3) If the current location is newer than the last locations, keep the
         // current location.
 
-
+		if (mLastLocationReading == null ||
+				currentLocation.getTime() > mLastLocationReading.getTime()) 
+		{
+			mLastLocationReading = currentLocation;
+		} 
 	}
 
 	@Override
