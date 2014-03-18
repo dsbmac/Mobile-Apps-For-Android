@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -69,13 +70,9 @@ public class PlaceViewAdapter extends CursorAdapter {
 		// the current set of PlaceRecords. Use the 
 		// getPlaceRecordFromCursor() method to add the
 		// current place to the list
-		
-
-            
-            
-            
-            
-            
+		list.clear();
+		list.add(getPlaceRecordFromCursor(newCursor));	
+     
             // Set the NotificationURI for the new cursor
 			newCursor.setNotificationUri(mContext.getContentResolver(),
 					PlaceBadgesContract.CONTENT_URI);
@@ -146,13 +143,22 @@ public class PlaceViewAdapter extends CursorAdapter {
 			list.add(listItem);
 
 			// TODO - Insert new record into the ContentProvider
-
 			
-
-		
-        
-        
-        
+			// Defines an object to contain the new values to insert
+			ContentValues mNewValues = new ContentValues();
+			mNewValues.put(PlaceBadgesContract.FLAG_BITMAP_PATH, listItem.getFlagBitmapPath());
+			mNewValues.put(mCountryName, listItem.getCountryName());
+			mNewValues.put(mPlaceName, listItem.getPlace());
+			mNewValues.put(mCountryName, listItem.getCountryName());
+			mNewValues.put(mCountryName, listItem.getCountryName());
+			mNewValues.put(mCountryName, listItem.getCountryName());
+			mNewValues.put(mCountryName, listItem.getCountryName());
+	private String ;
+	private Bitmap mFlagBitmap;
+	private double lat;
+	private double lon;
+			mContext.getContentResolver().insert(uri, mNewValues);        
+			
         }
 
 	}

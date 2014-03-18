@@ -19,4 +19,5 @@
 <fullyQualifiedTypeName name="course.labs.locationlab.R.layout"/>
 <fullyQualifiedTypeName name="android.view.LayoutInflater"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
 </qualifiedTypeNameHistroy>
