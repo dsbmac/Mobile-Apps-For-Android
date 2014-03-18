@@ -23,10 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import course.labs.contentproviderlab.provider.PlaceBadgesContract;
-import course.labs.locationlab.PlaceDownloaderTask;
-import course.labs.locationlab.PlaceViewActivity;
-import course.labs.locationlab.PlaceViewAdapter;
-import course.labs.locationlab.R;
+
 
 public class PlaceViewActivity extends ListActivity implements
 		LocationListener, LoaderCallbacks<Cursor> {
@@ -59,12 +56,9 @@ public class PlaceViewActivity extends ListActivity implements
 
         // TODO - Set up the app's user interface
         // This class is a ListActivity, so it has its own ListView
-		super.onCreate(savedInstanceState);
+
 		ListView listView = this.getListView();
 		listView.setFooterDividersEnabled(true);
-
-		mAdapter = new PlaceViewAdapter(getApplicationContext());
- 
 
         // TODO - add a footerView to the ListView
         // You can use footer_view.xml to define the footer
@@ -73,10 +67,8 @@ public class PlaceViewActivity extends ListActivity implements
 		LayoutInflater inflater = this.getLayoutInflater();
 		footerView = (View) inflater.inflate( R.layout.footer_view, listView, false);
 		
-		listView.addFooterView(footerView);
-		listView.setAdapter(mAdapter); //if you add this before adding the footer it does not show
-		
-footerView.setOnClickListener(new OnClickListener() {
+		listView.addFooterView(footerView);		
+		footerView.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -103,9 +95,10 @@ footerView.setOnClickListener(new OnClickListener() {
 		        // Issue the following log call:
 		        // log("You already have this location badge");
 		        
-		        else if (mAdapter.intersects(mLastLocationReading)) {
+		        else if (mCursorAdapter.intersects(mLastLocationReading)) {
 		        	
 		        	log("You already have this location badge");
+		        	return;
 
 		        }
 		        
@@ -121,39 +114,17 @@ footerView.setOnClickListener(new OnClickListener() {
 		        	download.execute(mLastLocationReading);
 		        }
 			}
-		});  
-	
-		
+		});  		
 		
 		// TODO - Create and set empty PlaceViewAdapter
         // ListView's adapter should be a PlaceViewAdapter called mCursorAdapter
 
-		
-		
+		mCursorAdapter = new PlaceViewAdapter(getApplicationContext(), null, 0);
 		
 		// TODO - Initialize a CursorLoader
+		LoaderManager loaderManager = getLoaderManager();
 
-        
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		mMockLocationProvider = new MockLocationProvider(
-				LocationManager.NETWORK_PROVIDER, this);
-
-		// TODO - Check NETWORK_PROVIDER for an existing location reading.
-		// Only keep this last reading if it is fresh - less than 5 minutes old.
-
-
-		
-		
-		
-		// TODO - Register to receive location updates from NETWORK_PROVIDER
-
-		
-		
+		loaderManager.initLoader(1, null, this);
 		
 	}
 
@@ -162,11 +133,36 @@ footerView.setOnClickListener(new OnClickListener() {
 
 		mMockLocationProvider.shutdown();
 
-		// TODO - Unregister for location updates
-
-		
+		// TODO - unregister for location updates
+		mLocationManager.removeUpdates(this);
 		
 		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		mMockLocationProvider = new MockLocationProvider(
+				LocationManager.NETWORK_PROVIDER, this);
+
+        // TODO - Check NETWORK_PROVIDER for an existing location reading.
+        // Only keep this last reading if it is fresh - less than 5 minutes old.
+		
+		if (null == (mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE)))
+			finish();
+		
+		Location locationReading = bestLastKnownLocation(mMinTime);
+		
+		if (locationReading != null) {
+			mLastLocationReading = locationReading;
+		} else {
+			mLastLocationReading = null;
+		}
+		
+        // TODO - register to receive location updates from NETWORK_PROVIDER
+		mLocationManager.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER, mMinTime, mMinDistance, this);
 	}
 
 	public void addNewPlace(PlaceRecord place) {
@@ -180,18 +176,19 @@ footerView.setOnClickListener(new OnClickListener() {
 	@Override
 	public void onLocationChanged(Location currentLocation) {
 
-		// TODO - Handle location updates
-		// Cases to consider
-		// 1) If there is no last location, keep the current location.
-		// 2) If the current location is older than the last location, ignore
-		// the current location
-		// 3) If the current location is newer than the last locations, keep the
-		// current location.
+        // TODO - Handle location updates
+        // Cases to consider
+        // 1) If there is no last location, keep the current location.
+        // 2) If the current location is older than the last location, ignore
+        // the current location
+        // 3) If the current location is newer than the last locations, keep the
+        // current location.
 
-
-	
-	
-	
+		if (mLastLocationReading == null ||
+				currentLocation.getTime() > mLastLocationReading.getTime()) 
+		{
+			mLastLocationReading = currentLocation;
+		} 
 	}
 
 	@Override
@@ -211,28 +208,33 @@ footerView.setOnClickListener(new OnClickListener() {
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		
 		log("Entered onCreateLoader()");
 
 		// TODO - Create a new CursorLoader and return it
-		
-        
-        return null;
+		CursorLoader cursorLoader = new CursorLoader(getApplicationContext());
+
+        return cursorLoader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> newLoader, Cursor newCursor) {
 
 		// TODO - Swap in the newCursor
-
-	
+		if(mCursorAdapter!=null && newCursor!=null)
+			mCursorAdapter.swapCursor(newCursor); //swap the new cursor in.
+		else
+			Log.v(TAG,"OnLoadFinished: mAdapter is null");	
     }
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> newLoader) {
 
 		// TODO - Swap in a null Cursor
-
-	
+		if(mCursorAdapter!=null)
+			mCursorAdapter.swapCursor(null);
+		else
+			Log.v(TAG,"OnLoadFinished: mAdapter is null");	
     }
 
 	private long age(Location location) {
@@ -279,5 +281,29 @@ footerView.setOnClickListener(new OnClickListener() {
 			e.printStackTrace();
 		}
 		Log.i(TAG, msg);
+	}
+	
+	private Location bestLastKnownLocation(long minTime) {
+
+		Location bestResult = null;
+		long bestTime = Long.MIN_VALUE;
+
+		String provider = LocationManager.NETWORK_PROVIDER; 
+		Location location = mLocationManager.getLastKnownLocation(provider);
+
+		if (location != null) {
+
+			long time = location.getTime();
+
+			bestResult = location;
+			bestTime = time;
+		}
+
+		// Return best reading or null
+		if (bestTime < minTime) {
+			return null;
+		} else {
+			return bestResult;
+		}
 	}
 }
