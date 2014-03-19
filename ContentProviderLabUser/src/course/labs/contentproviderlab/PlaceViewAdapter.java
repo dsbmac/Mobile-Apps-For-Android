@@ -169,7 +169,7 @@ public class PlaceViewAdapter extends CursorAdapter {
 		list.clear();
 
 		// TODO - delete all records in the ContentProvider
-		mContext.getContentResolver().delete(PlaceBadgesContract.CONTENT_URI, null, null);        
+		mContext.getContentResolver().delete(PlaceBadgesContract.CONTENT_URI, "1", null);        
 		mContext.getContentResolver().notifyChange(PlaceBadgesContract.CONTENT_URI, null);        
 	}
 

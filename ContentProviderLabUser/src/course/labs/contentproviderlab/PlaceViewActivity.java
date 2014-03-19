@@ -53,6 +53,7 @@ public class PlaceViewActivity extends ListActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 
         // TODO - Set up the app's user interface
@@ -148,8 +149,6 @@ public class PlaceViewActivity extends ListActivity implements
 	@Override
 	protected void onResume() {
 		
-		log("Entered onResume()");
-
 		super.onResume();
 
 		mMockLocationProvider = new MockLocationProvider(
@@ -163,7 +162,7 @@ public class PlaceViewActivity extends ListActivity implements
 		
 		Location locationReading = bestLastKnownLocation(mMinTime);
 		
-		if (locationReading != null & locationReading.getTime() < FIVE_MINS) {
+		if (locationReading != null) {
 			mLastLocationReading = locationReading;
 		} else {
 			mLastLocationReading = null;
@@ -296,8 +295,6 @@ public class PlaceViewActivity extends ListActivity implements
 	
 	private Location bestLastKnownLocation(long minTime) {
 		
-		log("Entered bestLastKnownLocation()");
-
 		Location bestResult = null;
 		long bestTime = Long.MIN_VALUE;
 
