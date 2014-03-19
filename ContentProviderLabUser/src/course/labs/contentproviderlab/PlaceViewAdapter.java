@@ -147,20 +147,13 @@ public class PlaceViewAdapter extends CursorAdapter {
 			// Defines an object to contain the new values to insert
 			ContentValues mNewValues = new ContentValues();
 			mNewValues.put(PlaceBadgesContract.FLAG_BITMAP_PATH, listItem.getFlagBitmapPath());
-			mNewValues.put(mCountryName, listItem.getCountryName());
-			mNewValues.put(mPlaceName, listItem.getPlace());
-			mNewValues.put(mCountryName, listItem.getCountryName());
-			mNewValues.put(mCountryName, listItem.getCountryName());
-			mNewValues.put(mCountryName, listItem.getCountryName());
-			mNewValues.put(mCountryName, listItem.getCountryName());
-	private String ;
-	private Bitmap mFlagBitmap;
-	private double lat;
-	private double lon;
-			mContext.getContentResolver().insert(uri, mNewValues);        
-			
-        }
+			mNewValues.put(PlaceBadgesContract.COUNTRY_NAME, listItem.getCountryName());
+			mNewValues.put(PlaceBadgesContract.PLACE_NAME, listItem.getPlace());
+			mNewValues.put(PlaceBadgesContract.LAT, listItem.getLat());
+			mNewValues.put(PlaceBadgesContract.LON, listItem.getLon());
 
+			mContext.getContentResolver().insert(PlaceBadgesContract.CONTENT_URI, mNewValues);        
+        }
 	}
 
 	public ArrayList<PlaceRecord> getList() {
@@ -172,11 +165,7 @@ public class PlaceViewAdapter extends CursorAdapter {
 		list.clear();
 
 		// TODO - delete all records in the ContentProvider
-
-
-        
-        
-        
+		mContext.getContentResolver().delete(PlaceBadgesContract.CONTENT_URI, null, null);        
 	}
 
 	@Override

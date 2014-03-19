@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestOneValidLocation (1)" project="ContentProviderLabTest" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="LabPhone [emulator-5554]" time="2.491">
+    <testsuite name="course.labs.contentproviderlab.test.TestOneValidLocation" time="2.491">
+      <testcase name="testRun " classname="course.labs.contentproviderlab.test.TestOneValidLocation" time="2.491">
+        <error>Test failed to run to completion. Reason: 'Instrumentation run failed due to 'java.lang.NullPointerException''. Check device logcat for details&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>

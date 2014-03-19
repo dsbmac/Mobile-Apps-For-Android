@@ -25,6 +25,7 @@ import android.widget.Toast;
 import course.labs.contentproviderlab.provider.PlaceBadgesContract;
 
 
+
 public class PlaceViewActivity extends ListActivity implements
 		LocationListener, LoaderCallbacks<Cursor> {
 	private static final long FIVE_MINS = 5 * 60 * 1000;
@@ -60,14 +61,22 @@ public class PlaceViewActivity extends ListActivity implements
 		ListView listView = this.getListView();
 		listView.setFooterDividersEnabled(true);
 
+		mCursorAdapter = new PlaceViewAdapter(getApplicationContext(), null, 0);
+		
         // TODO - add a footerView to the ListView
         // You can use footer_view.xml to define the footer
-
+		
 		View footerView = null;
 		LayoutInflater inflater = this.getLayoutInflater();
 		footerView = (View) inflater.inflate( R.layout.footer_view, listView, false);
 		
-		listView.addFooterView(footerView);		
+		listView.addFooterView(footerView);
+		listView.setAdapter(mCursorAdapter); //if you add this before adding the footer it does not show
+		
+        // TODO - When the footerView's onClick() method is called, it must issue the
+        // following log call
+        // log("Entered footerView.OnClickListener.onClick()");
+		
 		footerView.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -98,7 +107,6 @@ public class PlaceViewActivity extends ListActivity implements
 		        else if (mCursorAdapter.intersects(mLastLocationReading)) {
 		        	
 		        	log("You already have this location badge");
-		        	return;
 
 		        }
 		        
@@ -114,18 +122,16 @@ public class PlaceViewActivity extends ListActivity implements
 		        	download.execute(mLastLocationReading);
 		        }
 			}
-		});  		
+		});  
 		
 		// TODO - Create and set empty PlaceViewAdapter
         // ListView's adapter should be a PlaceViewAdapter called mCursorAdapter
+		Cursor cursor=this.getContentResolver().query(PlaceBadgesContract.CONTENT_URI, null, null, null, null);
 
-		mCursorAdapter = new PlaceViewAdapter(getApplicationContext(), null, 0);
+		mCursorAdapter = new PlaceViewAdapter(this, cursor, 0);
 		
 		// TODO - Initialize a CursorLoader
-		LoaderManager loaderManager = getLoaderManager();
-
-		loaderManager.initLoader(1, null, this);
-		
+		getLoaderManager().initLoader(1, null, this);
 	}
 
 	@Override
