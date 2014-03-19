@@ -126,12 +126,12 @@ public class PlaceViewActivity extends ListActivity implements
 		
 		// TODO - Create and set empty PlaceViewAdapter
         // ListView's adapter should be a PlaceViewAdapter called mCursorAdapter
-		Cursor cursor=this.getContentResolver().query(PlaceBadgesContract.CONTENT_URI, null, null, null, null);
+		Cursor cursor = this.getContentResolver().query(PlaceBadgesContract.CONTENT_URI, null, null, null, null);
 
 		mCursorAdapter = new PlaceViewAdapter(this, cursor, 0);
 		
 		// TODO - Initialize a CursorLoader
-		getLoaderManager().initLoader(1, null, this);
+		getLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
@@ -147,6 +147,9 @@ public class PlaceViewActivity extends ListActivity implements
 	
 	@Override
 	protected void onResume() {
+		
+		log("Entered onResume()");
+
 		super.onResume();
 
 		mMockLocationProvider = new MockLocationProvider(
@@ -160,7 +163,7 @@ public class PlaceViewActivity extends ListActivity implements
 		
 		Location locationReading = bestLastKnownLocation(mMinTime);
 		
-		if (locationReading != null) {
+		if (locationReading != null & locationReading.getTime() < FIVE_MINS) {
 			mLastLocationReading = locationReading;
 		} else {
 			mLastLocationReading = null;
@@ -191,7 +194,7 @@ public class PlaceViewActivity extends ListActivity implements
         // current location.
 
 		if (mLastLocationReading == null ||
-				currentLocation.getTime() > mLastLocationReading.getTime()) 
+				currentLocation.getTime() < mLastLocationReading.getTime()) 
 		{
 			mLastLocationReading = currentLocation;
 		} 
@@ -216,19 +219,21 @@ public class PlaceViewActivity extends ListActivity implements
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		
 		log("Entered onCreateLoader()");
-
+	
 		// TODO - Create a new CursorLoader and return it
-		CursorLoader cursorLoader = new CursorLoader(getApplicationContext());
-
-        return cursorLoader;
+		CursorLoader cursorLoader = new CursorLoader(getApplicationContext(), PlaceBadgesContract.CONTENT_URI, 
+				null , null, null, null);
+	
+	    return cursorLoader;
 	}
+
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> newLoader, Cursor newCursor) {
 
 		// TODO - Swap in the newCursor
 		if(mCursorAdapter!=null && newCursor!=null)
-			mCursorAdapter.swapCursor(newCursor); //swap the new cursor in.
+			mCursorAdapter.swapCursor(newCursor); 
 		else
 			Log.v(TAG,"OnLoadFinished: mAdapter is null");	
     }
@@ -290,6 +295,8 @@ public class PlaceViewActivity extends ListActivity implements
 	}
 	
 	private Location bestLastKnownLocation(long minTime) {
+		
+		log("Entered bestLastKnownLocation()");
 
 		Location bestResult = null;
 		long bestTime = Long.MIN_VALUE;
