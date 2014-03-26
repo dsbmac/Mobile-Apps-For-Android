@@ -225,6 +225,7 @@ public class CreateStoryFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				Log.i(LOG_TAG, "entered buttonCreate onClick()");
 
 				// local Editables
 				Editable titleCreateable = titleET.getText();

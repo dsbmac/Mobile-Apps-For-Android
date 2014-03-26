@@ -277,7 +277,7 @@ public class StoryViewFragment extends Fragment {
 			
 			// TODO - Set the URI of the ImageView to the image path stored in the string
 			// imageMetaDataPath, using the setImageURI function from the ImageView
-			Uri uriImage = Uri.parse(new File(imageMetaDataPath).toString());
+			Uri uriImage = Uri.parse(imageMetaDataPath);
 			imageMetaDataView.setImageURI(uriImage);
 			
 			Long time = Long.valueOf(storyData.storyTime);
