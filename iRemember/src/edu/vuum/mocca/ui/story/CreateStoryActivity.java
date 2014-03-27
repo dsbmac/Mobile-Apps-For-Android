@@ -236,11 +236,11 @@ public class CreateStoryActivity extends StoryActivityBase {
 		
 		// TODO - Use getOutputMediaFile() to create a new 
 		// filename for this specific sound file
-		String filename = getOutputMediaFile(MEDIA_TYPE_AUDIO).getName(); 
+		File filename = getOutputMediaFile(MEDIA_TYPE_AUDIO);
 		
 		// TODO - Add the filename to the Intent as an extra. Use the Intent-extra name
 		// from the SoundRecordActivity class, EXTRA_OUTPUT
-		intent.putExtra(SoundRecordActivity.EXTRA_OUTPUT, filename);
+		intent.putExtra(SoundRecordActivity.EXTRA_OUTPUT, filename.getPath());
 		
 		// TODO - Start a new activity for result, using the new intent and the request
 		// code MIC_SOUND_REQUEST
@@ -259,8 +259,7 @@ public class CreateStoryActivity extends StoryActivityBase {
 		
 		// TODO - Set the imagePath for this image file using the pre-made function
 		// getOutputMediaFile to create a new filename for this specific image;
-		File file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-		fragment.imagePath = Uri.fromFile(file);
+		fragment.imagePath = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
 		// TODO - Add the filename to the Intent as an extra. Use the Intent-extra name
 		// from the MediaStore class, EXTRA_OUTPUT
@@ -283,11 +282,10 @@ public class CreateStoryActivity extends StoryActivityBase {
 		// TODO - Set the fileUri for this video file using the pre-made function
 		// getOutputMediaFile to create a new filename for this specific video;
 		fragment.fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
-		String filename = getOutputMediaFile(MEDIA_TYPE_VIDEO).getName(); 
 		
 		// TODO - Add the filename to the Intent as an extra. Use the Intent-extra name
 		// from the MediaStore class, EXTRA_OUTPUT
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, filename);		
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, fragment.fileUri);		
 		
 		// TODO - Specify as an extra that the video quality should be HIGH. Use the
 		// Intent-extra name, EXTRA_VIDEO_QUALITY, from the MediaStore class
@@ -299,5 +297,4 @@ public class CreateStoryActivity extends StoryActivityBase {
 		startActivityForResult(intent, CAMERA_VIDEO_REQUEST);
 	
 	}
-
 }
