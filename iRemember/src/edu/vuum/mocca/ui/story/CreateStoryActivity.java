@@ -281,7 +281,10 @@ public class CreateStoryActivity extends StoryActivityBase {
 		
 		// TODO - Set the fileUri for this video file using the pre-made function
 		// getOutputMediaFile to create a new filename for this specific video;
-		fragment.fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
+		//fragment.fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
+		File file = getOutputMediaFile(MEDIA_TYPE_VIDEO);
+		Uri fileUri = Uri.parse(file.getAbsolutePath());
+
 		
 		// TODO - Add the filename to the Intent as an extra. Use the Intent-extra name
 		// from the MediaStore class, EXTRA_OUTPUT
